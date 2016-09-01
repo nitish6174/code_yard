@@ -12,13 +12,21 @@ editor.getSession().on( "change", function () {
 
 
 
-$('#compile').click(function() {
-	var textarea_value = $("#inp").val();
-	if(textarea_value=='') {
-		alert("Enter Some Text In Textarea");
-	}else{
-		alert(textarea_value);
-	}
+$('#run').click(function() {
+	$.ajax({
+                url: '',
+                method: 'post',
+                data: $('#userform').serialize()
+            })
+                    .success(function (result) {
+                        alert(result+'\nReload for change to reflect.');
+                        // location.reload();
+
+                    })
+                    .fail(function () {
+                        alert('There was an error. Please Try Again');
+                    });
+
 });
 
 $('#clear').click(function() {
@@ -34,4 +42,17 @@ $('.question_select').click(function(){
 	editor_codes[current_question-1] = current_code;
 	current_question = ($('a',this).attr('id'))[1];
 	editor.setValue(editor_codes[current_question-1]);	
+});
+
+
+$('#q1').click(function load_modal1(){
+$('#myModal1').modal('show');
+});
+
+$('#q2').click(function load_modal2(){
+$('#myModal2').modal('show');
+});
+
+$('#q3').click(function load_modal3(){
+$('#myModal3').modal('show');
 });

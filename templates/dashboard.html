@@ -40,10 +40,9 @@
 			</div>
 			<div class="collapse navbar-collapse" id="navbar">
 				<ul class="nav navbar-nav" style="margin-left:20px;">
-					<li class="question_select active"><a id="q1" href="#">Question 1</a></li>
-					<li class="question_select"><a id="q2" href="#">Question 2</a></li>
-					<li class="question_select"><a id="q3" href="#">Question 3</a></li>
-					<li class="question_select"><a id="q4" href="#">Question 4</a></li>
+					<li class="question_select active"><a id="q1" href="#" onclick="load_Modal1()">Question 1</a></li>
+					<li class="question_select"><a id="q2" href="#" onclick="load_Modal2()">Question 2</a></li>
+					<li class="question_select"><a id="q3" href="#" onclick="load_Modal3()">Question 3</a></li>
 				</ul>
 				<ul class="nav navbar-nav navbar-right">
 					<li id="event_title"><a href="#">CodeYard</a></li>
@@ -51,6 +50,58 @@
 			</div>
 		</div>
 	</nav>
+
+
+	<div id="myModal1" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  		<div class="modal-dialog modal-lg">
+    		<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				    <h4 class="modal-title">Question 1</h4>
+				</div>
+				<div class="modal-body">
+					<p>Some text in the modal.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+  		</div>
+	</div>
+
+	<div id="myModal2" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  		<div class="modal-dialog modal-lg">
+    		<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				    <h4 class="modal-title">Question 2</h4>
+				</div>
+				<div class="modal-body">
+					<p>Some text in the modal.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+  		</div>
+	</div>
+
+	<div id="myModal3" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  		<div class="modal-dialog modal-lg">
+    		<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				    <h4 class="modal-title">Question 3</h4>
+				</div>
+				<div class="modal-body">
+					<p>Some text in the modal.</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				</div>
+			</div>
+  		</div>
+	</div>
 
 	<div class="page container-fluid">
 	<div class="row">
@@ -95,7 +146,7 @@
 					</li>
 					<li>
 						<div>
-							<button class="btn btn-primary" id="compile">Compile</button>
+							<button class="btn btn-primary" id="run">Run</button>
 							<button class="btn btn-danger" id="clear">Clear</button>						
 						</div>
 					</li>
@@ -106,12 +157,16 @@
 		<div class="col-md-10">
 
 			<div id="editor"></div>
+			<div id="inputArea">
+				<textarea style="font-size:14px" color="white">INPUT AREA </textarea>
+			</div>
 
 			<div id="outputConsole">
 				<pre></pre>
 			</div>
 			
 		</div>
+		
 		
 	</div>
 	</div>
