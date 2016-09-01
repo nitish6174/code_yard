@@ -11,13 +11,11 @@ editor.getSession().on( "change", function () {
 });
 
 
-// do what you like with the input
-$input = $('<input type="text" name="which"/>').val(current_question);
-$('#userform').append($input);
-
 $('#submit').click(function() {
-	$.ajax({
-                url: '',
+    $input = $('<input type="text" name="which"/>').val(current_question);
+    $('#userform').append($input);
+    $.ajax({
+                url: '/submit',
                 method: 'post',
                 data: $('#userform').serialize()
             })
@@ -33,16 +31,17 @@ $('#submit').click(function() {
 
 $('#run').click(function() {
 	$.ajax({
-                url: '',
+                url: '/simulate',
                 method: 'post',
                 data: $('#userform').serialize()
             })
                     .success(function (result) {
-                    	if(result[0]==0)
+                    	if(result[0]=='0')
                     		$('#outputConsole').removeClass('success').addClass('error');
-                    	else if(result[0]==1)
+                    	else if(result[0]=='1')
                    			$('#outputConsole').addClass('success').removeClass('error');
-                    $('#outputConsole').html(result[1])    
+                        $('#outputConsole').html(result);
+                        alert(result)
                     })
                     .fail(function () {
                         alert('There was an error. Please Try Again');

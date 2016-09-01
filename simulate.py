@@ -21,8 +21,9 @@ linecount=0
 def on_run():
 	code = request.form['code']
 	inp = request.form['input']
+	return code
 	out = exec_code(code,inp)
-	ret = ()
+	ret = []
 	ret[0] = 'success'
 	if(out[0] == 0):
 		ret[0] = 'error'
