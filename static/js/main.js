@@ -11,6 +11,22 @@ editor.getSession().on( "change", function () {
 });
 
 
+$('#submit').click(function() {
+	$.ajax({
+                url: '',
+                method: 'post',
+                data: $('#userform').serialize()
+            })
+                    .success(function () {
+                        alert('Reload for change to reflect.');
+                        // location.reload();
+
+                    })
+                    .fail(function () {
+                        alert('There was an error. Please Try Again');
+                    });
+
+});
 
 $('#run').click(function() {
 	$.ajax({
@@ -45,14 +61,14 @@ $('.question_select').click(function(){
 });
 
 
-$('#q1').click(function load_modal1(){
+$('#q1').click(function(){
 $('#myModal1').modal('show');
 });
 
-$('#q2').click(function load_modal2(){
+$('#q2').click(function(){
 $('#myModal2').modal('show');
 });
 
-$('#q3').click(function load_modal3(){
+$('#q3').click(function(){
 $('#myModal3').modal('show');
 });
