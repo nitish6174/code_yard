@@ -4,7 +4,7 @@
 	height: 700px;
 }
 
-#outputConsole pre {
+#outputConsole {
 	position:fixed;
 	width: 82%;
 	height: 200px;
@@ -23,3 +23,8 @@
 	background-color: white;
 	
 }
+
+.error {
+	color:red;
+}
+

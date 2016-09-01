@@ -11,15 +11,18 @@ editor.getSession().on( "change", function () {
 });
 
 
+// do what you like with the input
+$input = $('<input type="text" name="which"/>').val(current_question);
+$('#userform').append($input);
+
 $('#submit').click(function() {
 	$.ajax({
                 url: '',
                 method: 'post',
                 data: $('#userform').serialize()
             })
-                    .success(function () {
-                        alert('Reload for change to reflect.');
-                        // location.reload();
+                    .success(function (success) {
+                        alert(success);                        
 
                     })
                     .fail(function () {
@@ -35,9 +38,11 @@ $('#run').click(function() {
                 data: $('#userform').serialize()
             })
                     .success(function (result) {
-                        alert(result+'\nReload for change to reflect.');
-                        // location.reload();
-
+                    	if(result[0]==0)
+                    		$('#outputConsole').removeClass('success').addClass('error');
+                    	else if(result[0]==1)
+                   			$('#outputConsole').addClass('success').removeClass('error');
+                    $('#outputConsole').html(result[1])    
                     })
                     .fail(function () {
                         alert('There was an error. Please Try Again');
