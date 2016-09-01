@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="static/images/logo.ico">
+
+	<title>CodeYard</title>
+
+	<link rel="stylesheet" type="text/css" href="static/css/ext/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="static/font-awesome/css/font-awesome.min.css">
+	<!-- <link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"> -->
+	<link rel="stylesheet" type="text/css" href='http://fonts.googleapis.com/css?family=Roboto+Slab:400,700,300'>
+	<link rel="stylesheet" type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:300,400,700'>
+
+	<link rel="stylesheet" type="text/css" href="static/css/ext/sb-admin.css">
+
+	<link rel="stylesheet" type="text/css" href="static/css/main.css">
+	<link rel="stylesheet" type="text/css" href="static/css/dashboard.css">
+
+</head>
+
+<body>
+
+	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#">
+					<img src="static/images/techno_logo_white.png" alt="logo">
+				</a>
+			</div>
+			<div class="collapse navbar-collapse" id="navbar">
+				<ul class="nav navbar-nav" style="margin-left:20px;">
+					<li class="question_select active"><a id="q1" href="#">Question 1</a></li>
+					<li class="question_select"><a id="q2" href="#">Question 2</a></li>
+					<li class="question_select"><a id="q3" href="#">Question 3</a></li>
+					<li class="question_select"><a id="q4" href="#">Question 4</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li id="event_title"><a href="#">CodeYard</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+
+	<div class="page container-fluid">
+	<div class="row">
+
+		<div class="col-md-2">
+			<div id="sideMenu">
+				<ul class="nav navbar-nav side-nav">
+					<li>
+						<a href="#" onclick="editor.insert('var samplevar = 0\n')"><i class="fa fa-fw fa-dashboard"></i> Variable</a>
+					</li>
+					<li>
+						<a href="#" data-toggle="collapse" data-target="#demo1"><i class="fa fa-fw fa-bar-chart-o"></i> Array<i class="fa fa-fw fa-caret-down"></i></a>
+						<ul id="demo1" class="collapse">
+							<li><a href="#" onclick="editor.insert('arr samplearray = [0]\n')">MakeArray</a></li>
+							<li><a href="#" onclick="editor.insert('len(samplearray)\n')">Length</a></li>
+							<li><a href="#" onclick="editor.insert('sort samplearray\n')">Sort</a></li>
+						</ul>
+					</li>
+					<li>
+						<a href="#" data-toggle="collapse" data-target="#demo2"><i class="fa fa-fw fa-table"></i> Loop<i class="fa fa-fw fa-caret-down"></i></a>
+						<ul id="demo2" class="collapse">
+							<li><a href="#" onclick="editor.insert('loop\n')">InsertLoop</a></li>
+							<li><a href="#" onclick="editor.insert('continue\n')">Continue</a></li>
+							<li><a href="#" onclick="editor.insert('break\n')">Break</a></li>
+							<li><a href="#" onclick="editor.insert('endloop\n')">EndOfLoop</a></li>
+						</ul>
+					</li> 
+					<li>
+						<a href="#" data-toggle="collapse" data-target="#demo3"><i class="fa fa-fw fa-edit"></i> If-Else <i class="fa fa-fw fa-caret-down"></i> </a>
+						<ul id="demo3" class="collapse">
+							<li><a href="#" onclick="editor.insert('if cond\n\n\n\nendif\n')">If</a></li>
+							<li><a href="#" onclick="editor.insert('elseif cond\n')">Else if</a></li>
+							<li><a href="#" onclick="editor.insert('else\n')">Else</a></li>
+							<li><a href="#" onclick="editor.insert('endif\n')">EndIf</a><li>
+						</ul>
+					</li>
+					<li>
+						<a href="#" onclick="editor.insert('print sample\n')">Print</a>
+					</li>
+					<li>
+						<a href="#" onclick="editor.insert('// Insert Your Comments Here : \n')">Comments</a>
+					</li>
+					<li>
+						<div>
+							<button class="btn btn-primary" id="compile">Compile</button>
+							<button class="btn btn-danger" id="clear">Clear</button>						
+						</div>
+					</li>
+				</ul>
+			</div>			
+		</div>
+
+		<div class="col-md-10">
+
+			<div id="editor"></div>
+
+			<div id="outputConsole">
+				<pre></pre>
+			</div>
+			
+		</div>
+		
+	</div>
+	</div>
+
+
+	
+
+
+	<script type="text/javascript" src="{{url_for('static',filename='js/ext/jquery.min.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static',filename='js/ext/bootstrap.min.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static',filename='editor/src-noconflict/ace.js')}}"></script>
+	<script type="text/javascript" src="{{url_for('static',filename='js/main.js')}}"></script>
+	
+</body>
+</html>

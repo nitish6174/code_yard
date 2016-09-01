@@ -1,0 +1,16 @@
+.navbar-brand {
+	padding: 0;
+	vertical-align: middle;
+}
+.navbar-brand img {
+	margin-top : 5px;
+}
+
+#event_title * {
+	color: white;
+	font-size: 30px;
+}
+
+.page {
+	margin-top : 60px;
+}

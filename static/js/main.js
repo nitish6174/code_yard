@@ -3,15 +3,11 @@ current_code = "";
 current_question = 1;
 
 
-// var editor = ace.edit("editor");
-// editor.setTheme("ace/theme/terminal");
-// editor.session.setMode("ace/mode/text");
 var editor = ace.edit('editor');
-editor.session.setMode("ace/mode/batchfile");
+editor.session.setMode("ace/mode/python");
 editor.setTheme("ace/theme/monokai");
 editor.getSession().on( "change", function () {
 	current_code = editor.getSession().getValue();
-	// console.log(input.val());
 });
 
 
@@ -39,11 +35,3 @@ $('.question_select').click(function(){
 	current_question = ($('a',this).attr('id'))[1];
 	editor.setValue(editor_codes[current_question-1]);	
 });
-
-
-
-// function getset(pactive, pnew)
-// {
-// 	pactive=input
-// 	input=pnew
-// }
