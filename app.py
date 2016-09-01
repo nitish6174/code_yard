@@ -4,8 +4,10 @@ import json
 import re
 import os, os.path
 
-app = Flask(__name__)
+from simulate import simulate_module
 
+app = Flask(__name__)
+app.register_blueprint(simulate_module)
 
 @app.route('/', methods=['GET'])
 def index():
@@ -14,7 +16,6 @@ def index():
 			return redirect(url_for('dashboard'))
 		else:
 			return redirect(url_for('login'))
-
 
 @app.route('/login', methods=['GET','POST'])
 def login():
@@ -48,9 +49,9 @@ def dashboard():
 def submit_code():
 	code = request.form['code']
 	which = request.form['which']
-	session['done'][which] = 1
+	session['done'][which-1] = 1
 	unlock = 1
-	for i in range(1,3):
+	for i in range(3):
 		if session['done'][i] == 0:
 			unlock = 0
 			break
@@ -63,7 +64,7 @@ def submit_code():
 	f.close()
 	return 'Submission Number: ' + str(num_files+1) + 'Congratulation! Your code has been submitted\nIf possible you may try a more optimized approach for more marks'
 
-@app.route('/logout', methods=['GET','POST'])
+@app.route('/logout', methods=['GET'])
 def logout():
 	session.pop('username', None)
 	return redirect(url_for('login'))
