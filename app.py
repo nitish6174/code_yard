@@ -27,21 +27,20 @@ def login():
 			login_password = request.form['password']
 			if re.match(r'^team\d\d$',login_username)!=None and re.match(r'^\d{4}$',login_password)!=None:
 				team_number = int(login_username[4:6])
-				team_password = (7383*team_number)%10000
+				team_password = (1234+7383*team_number)%10000
 				if team_password==int(login_password):
 					session['username'] = request.form['username']
-					return redirect(url_for('dashboard'))
-			return redirect(url_for('login'))
+					return url_for("dashboard", _external=True)
+			return url_for("login", _external=True)
 
 
 @app.route('/dashboard', methods=['GET'])
 def dashboard():
-	# if 'username' not in session:
-	# 	return redirect(url_for('login'))
-	# else:
-	# 	if request.method == 'GET':
-	# 		return render_template('dashboard.html')
-	return render_template('dashboard.html')
+	if 'username' not in session:
+		return redirect(url_for('login'))
+	else:
+		if request.method == 'GET':
+			return render_template('dashboard.html')
 
 
 @app.route('/logout', methods=['GET','POST'])

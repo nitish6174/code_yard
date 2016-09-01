@@ -1,6 +1,14 @@
 $('#login_form').submit(function(e){
 	e.preventDefault();
-	console.log($('#login_username').val());
-	console.log($('#login_password').val());
+	login_username = $('#login_username').val();
+	login_password = $('#login_password').val();
+
+	$.post('/login',{
+		username : login_username,
+		password : login_password
+	},function(data){
+		window.location = data;
+	});
+
 	return false;
 });
