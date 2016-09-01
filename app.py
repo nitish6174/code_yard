@@ -2,6 +2,7 @@ from flask import Flask,request,render_template,session,redirect,url_for,escape
 import requests
 import json
 import re
+import os, os.path
 
 app = Flask(__name__)
 
@@ -30,9 +31,10 @@ def login():
 				team_password = (1234+7383*team_number)%10000
 				if team_password==int(login_password):
 					session['username'] = request.form['username']
+					session['done'] = (0,0,0,0,0,0)
+					session['unlock'] = 0
 					return url_for("dashboard", _external=True)
 			return url_for("login", _external=True)
-
 
 @app.route('/dashboard', methods=['GET'])
 def dashboard():
@@ -42,13 +44,29 @@ def dashboard():
 		if request.method == 'GET':
 			return render_template('dashboard.html')
 
+@app.route('/submit', methods=['POST'])
+def submit_code():
+	code = request.form['code']
+	which = request.form['which']
+	session['done'][which] = 1
+	unlock = 1
+	for i in range(1,3):
+		if session['done'][i] == 0:
+			unlock = 0
+			break
+	session['unlock'] = unlock
+	dir_name = 'codes/'+session['username']+'/q'+which
+	num_files = len([name for name in os.listdir(dir_name) if os.path.isfile(name)])
+	filename = code+str(num_files)+'.pyc'
+	f = open(filename,'w')
+	f.write(code)
+	f.close()
+	return 'Submission Number: ' + str(num_files+1) + 'Congratulation! Your code has been submitted\nIf possible you may try a more optimized approach for more marks'
 
 @app.route('/logout', methods=['GET','POST'])
 def logout():
 	session.pop('username', None)
 	return redirect(url_for('login'))
-
-
 
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
