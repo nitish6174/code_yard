@@ -30,8 +30,8 @@ def on_run():
 	ret[1] = out[1]
 	return ret
 
-def exec_code(code,inp):
 
+def exec_code(code,inp):
 	py.append(tabcount()+'import time')
 	py.append('\n')
 	py.append(tabcount()+'timeout= time.time() + 30')
