@@ -58,7 +58,7 @@ def submit_code():
 	session['unlock'] = unlock
 	dir_name = 'codes/'+session['username']+'/q'+which
 	num_files = len([name for name in os.listdir(dir_name) if os.path.isfile(name)])
-	filename = code+str(num_files)+'.pyc'
+	filename = code+str(num_files)+'.pj'
 	f = open(filename,'w')
 	f.write(code)
 	f.close()
