@@ -32,8 +32,14 @@ def login():
 				team_password = (1234+7383*team_number)%10000
 				if team_password==int(login_password):
 					session['username'] = request.form['username']
-					session['done'] = (0,0,0,0,0,0)
+					session['done'] = [0,0,0,0,0,0]
 					session['unlock'] = 0
+					directory = 'codes/'+session['username']
+					if not os.path.exists(directory):
+						print "not exists"
+						os.makedirs(directory)
+						for i in range(1,7):
+							os.makedirs(directory+'/q'+str(i))
 					return url_for("dashboard", _external=True)
 			return url_for("login", _external=True)
 
@@ -49,7 +55,7 @@ def dashboard():
 def submit_code():
 	code = request.form['code']
 	which = request.form['which']
-	session['done'][which-1] = 1
+	session['done'][int(which)-1] = 1
 	unlock = 1
 	for i in range(3):
 		if session['done'][i] == 0:
@@ -59,10 +65,10 @@ def submit_code():
 	dir_name = 'codes/'+session['username']+'/q'+which
 	num_files = len([name for name in os.listdir(dir_name) if os.path.isfile(name)])
 	filename = code+str(num_files)+'.pj'
-	f = open(filename,'w')
+	f = open(dir_name+'/'+filename,'w')
 	f.write(code)
 	f.close()
-	return 'Submission Number: ' + str(num_files+1) + 'Congratulation! Your code has been submitted\nIf possible you may try a more optimized approach for more marks'
+	return 'Submission Number: ' + str(num_files+1) + '\nCongratulation! Your code has been submitted\nIf possible you may try a more optimized approach for more marks'
 
 @app.route('/logout', methods=['GET'])
 def logout():

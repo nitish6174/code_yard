@@ -8,16 +8,17 @@ editor.session.setMode("ace/mode/python");
 editor.setTheme("ace/theme/monokai");
 editor.getSession().on( "change", function () {
 	current_code = editor.getSession().getValue();
+    $('#code').val(current_code);
 });
 
 
 $('#submit').click(function() {
-    $input = $('<input type="text" name="which"/>').val(current_question);
-    $('#userform').append($input);
+    
+    console.log($('#userform').serialize()+'&which='+current_question);
     $.ajax({
                 url: '/submit',
                 method: 'post',
-                data: $('#userform').serialize()
+                data: $('#userform').serialize()+'&which='+current_question
             })
                     .success(function (success) {
                         alert(success);                        
@@ -30,6 +31,7 @@ $('#submit').click(function() {
 });
 
 $('#run').click(function() {
+    console.log($('#userform').serialize());
 	$.ajax({
                 url: '/simulate',
                 method: 'post',
@@ -40,8 +42,9 @@ $('#run').click(function() {
                     		$('#outputConsole').removeClass('success').addClass('error');
                     	else if(result[0]=='1')
                    			$('#outputConsole').addClass('success').removeClass('error');
+                        result = result.substr(1);
                         $('#outputConsole').html(result);
-                        alert(result)
+                        // alert(result);
                     })
                     .fail(function () {
                         alert('There was an error. Please Try Again');
@@ -62,6 +65,7 @@ $('.question_select').click(function(){
 	editor_codes[current_question-1] = current_code;
 	current_question = ($('a',this).attr('id'))[1];
 	editor.setValue(editor_codes[current_question-1]);	
+    $('#code').val('');
 });
 
 

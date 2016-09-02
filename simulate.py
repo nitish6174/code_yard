@@ -7,7 +7,7 @@ from cStringIO import StringIO
 simulate_module = Blueprint('simulate_module', __name__)
 
 var=[]
-py=[]
+py=['import time\n']
 lists=[]
 py1=[]
 errors=[]
@@ -21,25 +21,34 @@ linecount=0
 def on_run():
 	code = request.form['code']
 	inp = request.form['input']
-	return code
 	out = exec_code(code,inp)
-	ret = []
-	ret[0] = 'success'
+	# return "done"
+	ret = str(out[0])
 	if(out[0] == 0):
-		ret[0] = 'error'
 		out[1] = '<br>'.join(out[1])
-	ret[1] = out[1]
+	ret += out[1]
 	return ret
 
 
 def exec_code(code,inp):
-	py.append(tabcount()+'import time')
-	py.append('\n')
-	py.append(tabcount()+'timeout= time.time() + 30')
-	py.append('\n')
-	py.append('starttime=time.time()')
-	py.append('\n')
+	global py
+	global var
+	global lists
+	global py1
+	global errors
+	global countif
+	global countloop
+	global linecount
 
+	var=[]
+	py=['import time\n']
+	lists=[]
+	py1=[]
+	errors=[]
+	countif=0
+	countloop=0
+	linecount=0
+	
 	listl = [x.strip() for x in code.strip().split('\n') if x]
 
 	for k in range(len(listl)):
@@ -52,31 +61,26 @@ def exec_code(code,inp):
 	if(countloop>0):
 		errors.append('Error in endloop statement')
 
-	py.append('endtime=time.time()')
-	py.append('\n')
-	py.append('Runtime=-starttime+endtime')
-	py.append('\n')
-	py.append('print "Runtime: " + str(Runtime)')
-	py.append('\n')
-
 	py=''.join(py)
 
 	if(len(errors)):
 		return (0,errors)
 
 	else:
-		s = StringIO()
+		out = StringIO()
 		old_stdout = sys.stdout
-		sys.stdout = s
-		#try-catch block
+		sys.stdout = out
+		inp = StringIO(inp)
+		old_stdin = sys.stdin
+		sys.stdin = inp
 		exec(py)
-		# catch output in error_python
 		sys.stdout = old_stdout
-		output = s.getvalue()
-		if(error_python):
-			return (error_python,0)
-		else:
-			return (output,1)
+		sys.stdin = old_stdin
+		output = out.getvalue()
+		# if(error_python):
+		# 	return (error_python,0)
+		# else:
+		return (1,output)
 
 def breaks():
 	m=py[:]
@@ -102,6 +106,7 @@ def tabcount(offset=0):
 
 # var x; var x = 2
 def makevar(x1, v=0):
+	global errors
 	flag=0
 	for i in range(len(var)):
 				if(x1==var[i]):
