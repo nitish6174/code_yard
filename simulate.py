@@ -22,7 +22,7 @@ def on_run():
 	code = request.form['code']
 	inp = request.form['input']
 	out = exec_code(code,inp)
-	# return "done"
+	return "done"
 	ret = str(out[0])
 	if(out[0] == 0):
 		out[1] = '<br>'.join(out[1])

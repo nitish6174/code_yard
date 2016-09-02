@@ -70,6 +70,13 @@ def submit_code():
 	f.close()
 	return 'Submission Number: ' + str(num_files+1) + '\nCongratulation! Your code has been submitted\nIf possible you may try a more optimized approach for more marks'
 
+@app.route('/bonus', methods=['GET'])
+def  bonus():
+	if(session['unlock'] == 1):
+		return render_template('bonus.html')
+	else:
+		return "You are not yet there!"
+
 @app.route('/logout', methods=['GET'])
 def logout():
 	session.pop('username', None)

@@ -1,4 +1,4 @@
-editor_codes = [ "" , "" , "" , "" ];
+editor_codes = [ "" , "" , "" ];
 current_code = "";
 current_question = 1;
 
@@ -12,8 +12,7 @@ editor.getSession().on( "change", function () {
 });
 
 
-$('#submit').click(function() {
-    
+$('#submit').click(function() {    
     console.log($('#userform').serialize()+'&which='+current_question);
     $.ajax({
                 url: '/submit',
@@ -80,3 +79,16 @@ $('#myModal2').modal('show');
 $('#q3').click(function(){
 $('#myModal3').modal('show');
 });
+
+$('#q4').click(function(){
+$('#myModal4').modal('show');
+});
+
+$('#q5').click(function(){
+$('#myModal5').modal('show');
+});
+
+$('#q6').click(function(){
+$('#myModal6').modal('show');
+});
+
